@@ -1,0 +1,37 @@
+.hauteurPokedex{
+  height: 700px;
+}
+
+.selectPokemon:hover{
+  background-color: darkgrey;
+}
+
+.x4{
+  background-color: orangered;
+  border-radius: 3px;
+}
+.x2{
+  background-color: orange;
+  border-radius: 3px;
+
+}
+.x1{
+  background-color: lightgray;
+  border-radius: 3px;
+
+}
+.x05{
+  background-color: lightgreen;
+  border-radius: 3px;
+
+}
+.x025{
+  background-color: green;
+  border-radius: 3px;
+
+}
+.x0{
+  background-color: dimgray;
+  border-radius: 3px;
+
+}

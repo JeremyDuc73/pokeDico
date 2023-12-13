@@ -1,9 +1,66 @@
+<div class="container d-flex mt-4">
+  <div class="me-4 border border-dark d-flex flex-column">
+    <div class="haut">
+      <h1 class="d-flex justify-content-center mt-3">{{onePokemon.name.fr}}</h1>
+      <img src="{{onePokemon.sprites.regular}}">
+      <div class="d-flex justify-content-center mt-3">
+        <div *ngFor="let type of onePokemon.types">
+          <div class="d-flex flex-column align-items-center ms-4 me-4">
+            <img src="{{type.image}}">
+            <p>{{type.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bas ms-5 me-5">
+      <h3>Faiblesses</h3>
+      <div class="d-flex justify-content-center">
+        <div *ngFor="let affinite of onePokemon.resistances">
+          <div *ngIf="affinite.multiplier == 4" class="d-flex flex-column align-items-center">
+            <img class="ms-1 me-1" src="https://www.pokebip.com/pokedex-images/types/{{normalizestring(affinite.name)}}-v.png" alt="" width="22" height="100">
+            <h5 class="x4 p-1 mt-1">4</h5>
+          </div>
+          <div *ngIf="affinite.multiplier == 2" class="d-flex flex-column align-items-center">
+            <img class="ms-1 me-1" src="https://www.pokebip.com/pokedex-images/types/{{normalizestring(affinite.name)}}-v.png" alt="" width="22" height="100">
+            <h5 class="x2 p-1 mt-1">2</h5>
+          </div>
+          <div *ngIf="affinite.multiplier == 1" class="d-flex flex-column align-items-center">
+            <img class="ms-1 me-1" src="https://www.pokebip.com/pokedex-images/types/{{normalizestring(affinite.name)}}-v.png" alt="" width="22" height="100">
+            <h5 class="x1 p-1 mt-1">1</h5>
+          </div>
+          <div *ngIf="affinite.multiplier == 0.5" class="d-flex flex-column align-items-center">
+            <img class="ms-1 me-1" src="https://www.pokebip.com/pokedex-images/types/{{normalizestring(affinite.name)}}-v.png" alt="" width="22" height="100">
+            <h5 class="x05 p-1 mt-1">½</h5>
+          </div>
+          <div *ngIf="affinite.multiplier == 0.25" class="d-flex flex-column align-items-center">
+            <img class="ms-1 me-1" src="https://www.pokebip.com/pokedex-images/types/{{normalizestring(affinite.name)}}-v.png" alt="" width="22" height="100">
+            <h5 class="x025 p-1 mt-1">¼</h5>
+          </div>
+          <div *ngIf="affinite.multiplier == 0" class="d-flex flex-column align-items-center">
+            <img class="ms-1 me-1" src="https://www.pokebip.com/pokedex-images/types/{{normalizestring(affinite.name)}}-v.png" alt="" width="22" height="100">
+            <h5 class="x0 p-1 mt-1">0</h5>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<div class="container" *ngFor="let pokemon of pokemons | async" >
-  <div class="border border-dark m-3 p-2">
-    <p>{{pokemon.pokedexId}}</p>
-    <p>{{pokemon.category}}</p>
-    <p>{{pokemon.generation}}</p>
   </div>
-
+  <div>
+    <input [(ngModel)]="inputPokemon" class="form-control " type="text" placeholder="Veuillez saisir un pokemon">
+    <div class="overflow-y-scroll hauteurPokedex border border-dark">
+      <div *ngFor="let pokemon of pokemons | async">
+        <div *ngIf="comparestring(pokemon.name.fr, inputPokemon)">
+          <div *ngIf="pokemon.pokedexId !== 0" (click)="findOnePokemon(pokemon.pokedexId)" class="selectPokemon btn border border-dark m-3 p-2 d-flex justify-content-between align-items-center">
+            <p class="mb-0" *ngIf="pokemon.pokedexId < 10">00{{pokemon.pokedexId}}</p>
+            <p class="mb-0" *ngIf="pokemon.pokedexId < 100 && pokemon.pokedexId >= 10">0{{pokemon.pokedexId}}</p>
+            <p class="mb-0" *ngIf="pokemon.pokedexId >= 100">{{pokemon.pokedexId}}</p>
+            <p class="ms-4 mb-0">{{pokemon.name.fr}}</p>
+            <img class="ms-3" src="{{pokemon.sprites.regular}}" width="40" height="40">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+
